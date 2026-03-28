@@ -24,3 +24,7 @@ function revealCards() {
 }
 window.addEventListener('scroll', revealCards);
 window.addEventListener('load', revealCards);
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Formulaire soumis !');
+});
