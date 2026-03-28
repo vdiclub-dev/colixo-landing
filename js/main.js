@@ -1,9 +1,12 @@
-// Simulateur économie
-function calculEconomies(){
+// Simulateur d’économie
+function calculEconomies() {
   let nb = parseFloat(document.getElementById('nbColis').value);
   let poids = parseFloat(document.getElementById('poids').value);
   let cout = parseFloat(document.getElementById('coutActuel').value);
+
+  // Calcul simple : coût actuel * nb colis * 20% d’économie possible
   let economie = nb * cout * 0.2;
+
   document.getElementById('resultat').innerText = `💰 Économie potentielle : ${economie.toFixed(2)} CHF / mois`;
 }
 
