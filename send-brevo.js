@@ -12,12 +12,15 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
     const payload = {
         sender: { name: name, email: email },
-        to: [{ email: "ton-email@exemple.com" }], // 🔹 Remplace par ton email de réception
+        to: [{ email: "ton-email@exemple.com" }], // 🔹 Remplace par ton email
         subject: "Nouveau message depuis le formulaire",
         htmlContent: `<p><strong>Nom :</strong> ${name}</p>
                       <p><strong>Email :</strong> ${email}</p>
                       <p><strong>Message :</strong> ${message}</p>`
     };
+
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
 
     try {
         const response = await fetch('https://api.brevo.com/v3/smtp/email', {
@@ -30,15 +33,17 @@ document.getElementById('contactForm').addEventListener('submit', async function
         });
 
         if (response.ok) {
-            document.getElementById('successMsg').style.display = 'block';
-            document.getElementById('errorMsg').style.display = 'none';
+            successMsg.classList.add('show');
+            errorMsg.classList.remove('show');
             document.getElementById('contactForm').reset();
+            setTimeout(() => successMsg.classList.remove('show'), 4000);
         } else {
             throw new Error('Erreur API');
         }
     } catch (error) {
         console.error(error);
-        document.getElementById('errorMsg').style.display = 'block';
-        document.getElementById('successMsg').style.display = 'none';
+        errorMsg.classList.add('show');
+        successMsg.classList.remove('show');
+        setTimeout(() => errorMsg.classList.remove('show'), 4000);
     }
 });
