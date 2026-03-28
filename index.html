@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,27 +9,60 @@ body { margin:0; font-family:Arial,sans-serif; background:#0a0a0a; color:#fff; }
 .container { max-width:1000px; margin:auto; padding:50px 20px; text-align:center; }
 h1 { font-size:42px; color:#ff1e1e; }
 p { color:#ccc; font-size:18px; }
-input, button { padding:15px; margin:10px 0; border-radius:6px; border:none; }
-button { background:#ff1e1e; color:#fff; font-weight:bold; cursor:pointer; }
+input, button, select { padding:15px; margin:10px 0; border-radius:6px; border:none; }
+button { background:#ff1e1e; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s; }
+button:hover { transform:scale(1.05); }
+.card { background: rgba(30,30,30,0.7); padding:20px; border-radius:12px; margin:20px auto; max-width:400px; }
+.simulateur { text-align:left; max-width:400px; margin:auto; }
 </style>
 </head>
 <body>
-<form action="https://tonserveur.com/subscribe" method="POST">
-  <input type="text" name="COMPANY" placeholder="Nom de votre entreprise" required>
-  <input type="email" name="EMAIL" placeholder="Votre email" required>
-  <button type="submit">📩 Recevoir mon estimation</button>
-</form>
+
 <div class="container">
   <h1>Réduisez vos coûts d’expédition e-commerce</h1>
-  <p>Optimisation logistique pour les e-commerçants en Suisse</p>
+  <p>Optimisation logistique pour les e-commerçants en Suisse. Simple, rapide, sans engagement.</p>
 
-  <!-- FORMULAIRE BREVO -->
-  <form action="https://api.brevo.com/v3/contacts" method="post">
-    <input type="text" name="COMPANY" placeholder="Nom de votre entreprise" required>
-    <input type="email" name="EMAIL" placeholder="Votre email" required>
-    <button type="submit">📩 Recevoir mon estimation</button>
-  </form>
+  <!-- Boutons contact -->
+  <a href="mailto:contact@colixo.ch"><button>📧 Envoyer un mail</button></a>
+  <a href="https://wa.me/41798700488"><button>💬 WhatsApp</button></a>
+  <a href="https://calendly.com/colixo/rdv"><button>📅 Prendre RDV</button></a>
 
+  <!-- Formulaire Brevo -->
+  <div class="card">
+    <h2>Recevoir une estimation</h2>
+    <!-- Utiliser formulaire Brevo intégré -->
+    <form action="https://app.brevo.com/form/ID_DU_FORMULAIRE" method="POST">
+      <input type="text" name="COMPANY" placeholder="Nom de votre entreprise" required>
+      <input type="email" name="EMAIL" placeholder="Votre email" required>
+      <textarea name="NEEDS" placeholder="Votre besoin (optionnel)"></textarea>
+      <button type="submit">📩 Recevoir mon estimation</button>
+    </form>
+  </div>
+
+  <!-- Simulateur d’économie -->
+  <div class="card simulateur">
+    <h2>Simulez vos économies</h2>
+    <label>Nombre de colis / mois :</label>
+    <input type="number" id="nbColis" value="100">
+    <label>Poids moyen / colis (kg) :</label>
+    <input type="number" id="poids" value="2">
+    <p>Coût actuel / colis (CHF) :</p>
+    <input type="number" id="coutActuel" value="12">
+    <button type="button" onclick="calculEconomies()">Calculer économies</button>
+    <p id="resultat"></p>
+  </div>
 </div>
+
+<script>
+function calculEconomies(){
+  let nb = parseFloat(document.getElementById('nbColis').value);
+  let poids = parseFloat(document.getElementById('poids').value);
+  let cout = parseFloat(document.getElementById('coutActuel').value);
+  // Exemple : on réduit de 20% avec Colixo
+  let economie = nb * cout * 0.2;
+  document.getElementById('resultat').innerText = `💰 Économie potentielle : ${economie.toFixed(2)} CHF / mois`;
+}
+</script>
+
 </body>
 </html>
