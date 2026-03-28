@@ -29,14 +29,15 @@
     </form>
   </div>
 
-  <!-- Simulateur d’économie -->
+  <!-- Simulateur de coûts -->
   <div class="card simulateur">
-    <h2>Simulez vos économies</h2>
+    <h2>Simulez vos coûts d’expédition</h2>
+    <p>Entrez vos données et voyez combien vous pourriez économiser :</p>
     <label>Nombre de colis / mois :</label>
     <input type="number" id="nbColis" value="100">
     <label>Poids moyen / colis (kg) :</label>
     <input type="number" id="poids" value="2">
-    <p>Coût actuel / colis (CHF) :</p>
+    <label>Coût actuel / colis (CHF) :</label>
     <input type="number" id="coutActuel" value="12">
     <button type="button" class="btn btn-primary" onclick="calculEconomies()">Calculer économies</button>
     <p id="resultat" style="margin-top:15px;font-weight:bold;"></p>
