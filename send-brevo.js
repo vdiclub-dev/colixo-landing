@@ -3,7 +3,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
-const BREVO_API_KEY = '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';
+const BREVO_API_KEY = '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';
 
 app.post('/send', async (req, res) => {
   const data = req.body;
