@@ -4,61 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colixo – Optimisation e-commerce</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* Reset et fonts */
-body, html { margin:0; padding:0; font-family: 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color:#fff; }
-a { text-decoration: none; }
-
-/* Container principal */
+body, html { margin:0; padding:0; font-family:'Inter', sans-serif; background:#0a0a0a; color:#fff; overflow-x:hidden;}
 .container { max-width:1200px; margin:auto; padding:60px 20px; text-align:center; }
-
-/* Titres */
-h1 { font-size:48px; color:#ff1e1e; line-height:1.2; margin-bottom:20px; animation: fadeUp 1s ease forwards; opacity:0;}
+h1 { font-size:48px; color:#ff1e1e; line-height:1.2; margin-bottom:20px; opacity:0; transform:translateY(30px); animation:fadeUp 1s ease forwards;}
 h2 { font-size:28px; margin-bottom:15px; color:#fff; }
 p { color:#ccc; font-size:18px; line-height:1.6; margin-bottom:30px; }
-
-/* Boutons premium */
-button, .btn {
-  padding:16px 35px;
-  border-radius:50px;
-  font-weight:bold;
-  font-size:18px;
-  border:none;
-  cursor:pointer;
-  margin:10px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+button, .btn { padding:16px 40px; border-radius:50px; font-weight:bold; font-size:18px; border:none; cursor:pointer; margin:10px; transition: transform 0.3s, box-shadow 0.3s; }
 .btn-primary { background:#ff1e1e; color:#fff; box-shadow:0 6px 20px rgba(255,30,30,0.4);}
 .btn-primary:hover { transform:scale(1.05); box-shadow:0 8px 25px rgba(255,30,30,0.6);}
 .btn-secondary { background:transparent; border:2px solid #fff; color:#fff;}
 .btn-secondary:hover { transform:scale(1.05); }
 
-/* Cards */
-.card { background: rgba(30,30,30,0.7); backdrop-filter: blur(12px); padding:30px; border-radius:20px; margin:20px auto; max-width:450px; animation: fadeUp 1s ease forwards; opacity:0; }
-.card p { margin:15px 0; }
-
-/* Formulaire */
-input, textarea { width:100%; padding:15px; margin:10px 0; border-radius:10px; border:none; outline:none; font-size:16px; }
+.card { background: rgba(30,30,30,0.7); backdrop-filter: blur(15px); padding:30px; border-radius:20px; margin:20px auto; max-width:500px; opacity:0; transform:translateY(30px); animation:fadeUp 1s ease forwards; }
+input, textarea { width:100%; padding:15px; margin:10px 0; border-radius:12px; border:none; outline:none; font-size:16px; background:#1e1e1e; color:#fff;}
 textarea { resize:none; }
-
-/* Footer */
 .footer { margin-top:60px; font-size:14px; color:#64748b; }
-
-/* Simulateur économie */
 .simulateur input { width:calc(100% - 10px); }
 
 /* Animations */
 @keyframes fadeUp {
-  0% { opacity:0; transform: translateY(30px);}
-  100% { opacity:1; transform: translateY(0);}
+  0% { opacity:0; transform:translateY(30px);}
+  100% { opacity:1; transform:translateY(0);}
 }
 
-/* Responsive */
-@media(max-width:768px){
-  h1 { font-size:36px; }
-  h2 { font-size:24px; }
-  button, .btn { font-size:16px; padding:12px 25px; }
-}
+/* Scroll animation */
+.card { transition: transform 0.6s, opacity 0.6s; }
+.card.visible { opacity:1; transform:translateY(0);}
+@media(max-width:768px){ h1{font-size:36px;} h2{font-size:24px;} button,.btn{font-size:16px;padding:12px 30px;} }
 </style>
 </head>
 <body>
@@ -72,10 +46,10 @@ textarea { resize:none; }
   <a href="https://wa.me/41798700488"><button class="btn btn-secondary">💬 WhatsApp</button></a>
   <a href="https://calendly.com/colixo/rdv"><button class="btn btn-primary">📅 Prendre RDV</button></a>
 
-  <!-- Formulaire Brevo intégré -->
+  <!-- Formulaire Brevo -->
   <div class="card">
     <h2>Recevoir votre estimation</h2>
-    <form action="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" method="POST">
+    <form action="https://app.brevo.com/form/ID_DU_FORMULAIRE" method="POST">
       <input type="text" name="COMPANY" placeholder="Nom de votre entreprise" required>
       <input type="email" name="EMAIL" placeholder="Votre email" required>
       <textarea name="NEEDS" placeholder="Votre besoin (optionnel)"></textarea>
@@ -103,13 +77,26 @@ textarea { resize:none; }
 </div>
 
 <script>
+// Simulateur économie
 function calculEconomies(){
   let nb = parseFloat(document.getElementById('nbColis').value);
   let poids = parseFloat(document.getElementById('poids').value);
   let cout = parseFloat(document.getElementById('coutActuel').value);
-  let economie = nb * cout * 0.2; // Réduction estimée 20%
+  let economie = nb * cout * 0.2;
   document.getElementById('resultat').innerText = `💰 Économie potentielle : ${economie.toFixed(2)} CHF / mois`;
 }
+
+// Animation des cards au scroll
+const cards = document.querySelectorAll('.card');
+function revealCards() {
+  const windowHeight = window.innerHeight;
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < windowHeight - 100) { card.classList.add('visible'); }
+  });
+}
+window.addEventListener('scroll', revealCards);
+window.addEventListener('load', revealCards);
 </script>
 
 </body>
