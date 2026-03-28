@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colixo – Optimisation e-commerce</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="CSS/style.CSS">
+<link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
@@ -14,9 +14,11 @@
   <p>Colixo accompagne les e-commerçants en Suisse pour optimiser la logistique et réduire vos coûts, sans engagement.</p>
 
   <!-- Boutons contact -->
-  <a href="mailto:contact@colixo.ch"><button class="btn btn-primary">📧 Envoyer un mail</button></a>
-  <a href="https://wa.me/41798700488"><button class="btn btn-secondary">💬 WhatsApp</button></a>
-  <a href="https://calendly.com/colixo/rdv"><button class="btn btn-primary">📅 Prendre RDV</button></a>
+  <div class="btn-group">
+    <a href="mailto:contact@colixo.ch"><button class="btn btn-primary">📧 Mail</button></a>
+    <a href="https://wa.me/41798700488"><button class="btn btn-secondary">💬 WhatsApp</button></a>
+    <a href="https://calendly.com/colixo/rdv"><button class="btn btn-primary">📅 RDV</button></a>
+  </div>
 
   <!-- Formulaire Brevo -->
   <div class="card">
@@ -29,16 +31,20 @@
     </form>
   </div>
 
-  <!-- Simulateur de coûts -->
+  <!-- Simulateur avancé -->
   <div class="card simulateur">
     <h2>Simulez vos coûts d’expédition</h2>
-    <p>Entrez vos données et voyez combien vous pourriez économiser :</p>
+    <p>Entrez vos données pour voir combien vous pourriez économiser :</p>
+
     <label>Nombre de colis / mois :</label>
     <input type="number" id="nbColis" value="100">
+
     <label>Poids moyen / colis (kg) :</label>
     <input type="number" id="poids" value="2">
+
     <label>Coût actuel / colis (CHF) :</label>
     <input type="number" id="coutActuel" value="12">
+
     <button type="button" class="btn btn-primary" onclick="calculEconomies()">Calculer économies</button>
     <p id="resultat" style="margin-top:15px;font-weight:bold;"></p>
   </div>
