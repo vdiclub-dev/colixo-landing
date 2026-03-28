@@ -3,158 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colixo – Optimisation des expéditions</title>
+<title>Contact Brevo Premium</title>
 <style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-  background: linear-gradient(180deg, #0f172a, #020617);
-  color: white;
-  text-align: center;
-  padding: 50px 20px;
-}
-
-h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 18px;
-  color: #cbd5e1;
-  line-height: 1.6;
-}
-
-.btn {
-  display: inline-block;
-  margin: 10px;
-  padding: 15px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.btn-primary {
-  background: #fff;
-  color: #000;
-}
-
-.btn-primary:hover {
-  transform: scale(1.05);
-}
-
-.btn-secondary {
-  border: 1px solid #64748b;
-  color: #cbd5e1;
-}
-
-.section {
-  margin-top: 60px;
-}
-
-.card {
-  background: rgba(30, 41, 59, 0.6);
-  backdrop-filter: blur(10px);
-  padding: 30px;
-  border-radius: 20px;
-  margin-top: 20px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 15px;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 10px;
-  border-radius: 30px;
-  border: none;
-  background: #fff;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.footer {
-  margin-top: 80px;
-  font-size: 14px;
-  color: #64748b;
-}
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f0f0f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    form { background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); width: 100%; max-width: 400px; }
+    label { display: block; margin-top: 15px; font-weight: 500; }
+    input, textarea { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid #ccc; transition: border 0.3s; }
+    input:focus, textarea:focus { border-color: #007bff; outline: none; }
+    button { margin-top: 20px; width: 100%; padding: 12px; border: none; border-radius: 10px; background: linear-gradient(90deg,#007bff,#0056b3); color: #fff; font-size: 16px; cursor: pointer; transition: all 0.3s ease; }
+    button:hover { transform: scale(1.03); background: linear-gradient(90deg,#0056b3,#007bff); }
+    button:active { transform: scale(0.98); }
+    .success, .error { margin-top: 15px; opacity: 0; transition: opacity 0.5s; font-weight: bold; text-align: center; }
+    .success.show { color: green; opacity: 1; }
+    .error.show { color: red; opacity: 1; }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Optimisez vos expéditions.<br>Sans complexité.</h1>
-  <p>Colixo accompagne les entreprises en Suisse pour améliorer la gestion de leurs colis.  
-  Plus simple. Plus fluide. Souvent moins cher.</p>
+<form id="contactForm">
+    <h2 style="text-align:center;">Contactez-nous</h2>
 
-  <a href="tel:+41798700488" class="btn btn-primary">📞 Appel rapide</a>
-  <a href="https://wa.me/41798700488" class="btn btn-secondary">💬 WhatsApp</a>
+    <label for="name">Nom :</label>
+    <input type="text" id="name" name="name" required>
 
-  <div class="section">
-    <h2>Pourquoi Colixo ?</h2>
-    <div class="card">
-      <p>✔ Analyse rapide de votre système actuel</p>
-      <p>✔ Améliorations concrètes et immédiates</p>
-      <p>✔ Aucun changement complexe</p>
-      <p>✔ Aucun engagement</p>
-    </div>
-  </div>
+    <label for="email">E-mail :</label>
+    <input type="email" id="email" name="email" required>
 
-  <div class="section">
-    <h2>Contactez-nous</h2>
-    <div class="card">
-      <form id="contactForm">
-        <input type="text" name="company" placeholder="Nom de l’entreprise" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="needs" placeholder="Votre besoin (optionnel)"></textarea>
-        <button type="submit">Être contacté</button>
-      </form>
-      <p id="result"></p>
-    </div>
-  </div>
+    <label for="message">Message :</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
 
-  <div class="footer">
-    Didier Gysling – Colixo<br>
-    📞 079 870 04 88
-  </div>
-</div>
+    <button type="submit">Être contacté</button>
 
-<script>
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  const data = {
-    email: formData.get('email'),
-    attributes: {
-      COMPANY: formData.get('company'),
-      NEEDS: formData.get('needs') || ''
-    }
-  };
+    <p class="success" id="successMsg">Message envoyé avec succès !</p>
+    <p class="error" id="errorMsg">Erreur lors de l'envoi.</p>
+</form>
 
-  const res = await fetch('/send', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-
-  const result = await res.json();
-  document.getElementById('result').innerText = result.message;
-  form.reset();
-});
-</script>
-
+<script src="send-brevo.js"></script>
 </body>
 </html>
