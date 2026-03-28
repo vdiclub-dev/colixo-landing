@@ -10,10 +10,10 @@
 <body>
 
 <div class="container">
-  <h1>Réduisez vos coûts d’expédition e-commerce<br>Rapidement et facilement</h1>
-  <p>Colixo accompagne les e-commerçants en Suisse pour optimiser la logistique et réduire vos coûts, sans engagement.</p>
 
-  <!-- Boutons contact -->
+  <h1>Réduisez vos coûts d’expédition e-commerce<br>Rapidement et facilement</h1>
+  <p>Colixo aide les e-commerçants en Suisse à optimiser leurs colis et réduire leurs coûts sans engagement.</p>
+
   <div class="btn-group">
     <a href="mailto:contact@colixo.ch"><button class="btn btn-primary">📧 Mail</button></a>
     <a href="https://wa.me/41798700488"><button class="btn btn-secondary">💬 WhatsApp</button></a>
@@ -31,11 +31,9 @@
     </form>
   </div>
 
-  <!-- Simulateur avancé -->
+  <!-- Simulateur avancé + tarifs par colis -->
   <div class="card simulateur">
-    <h2>Simulez vos coûts d’expédition</h2>
-    <p>Entrez vos données pour voir combien vous pourriez économiser :</p>
-
+    <h2>Simulez vos coûts et voyez vos économies</h2>
     <label>Nombre de colis / mois :</label>
     <input type="number" id="nbColis" value="100">
 
@@ -47,12 +45,22 @@
 
     <button type="button" class="btn btn-primary" onclick="calculEconomies()">Calculer économies</button>
     <p id="resultat" style="margin-top:15px;font-weight:bold;"></p>
+
+    <div class="tarifs">
+      <h3>Tarifs par tranche de poids</h3>
+      <ul>
+        <li>0 – 2 kg : 9 CHF / colis</li>
+        <li>2 – 5 kg : 12 CHF / colis</li>
+        <li>5 – 10 kg : 18 CHF / colis</li>
+        <li>10 – 20 kg : 25 CHF / colis</li>
+      </ul>
+    </div>
   </div>
 
   <div class="footer">
-    Didier Gysling – Colixo<br>
-    📞 079 870 04 88
+    Didier Gysling – Colixo<br>📞 079 870 04 88
   </div>
+
 </div>
 
 <script src="js/main.js"></script>
