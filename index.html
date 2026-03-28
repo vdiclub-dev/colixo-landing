@@ -3,66 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colixo – Optimisation e-commerce</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="CSS/style.css">
+<title>Colixo – Optimisation des expéditions</title>
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+  background: linear-gradient(180deg, #0f172a, #020617);
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 15px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background: #fff;
+  color: #000;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  border: 1px solid #64748b;
+  color: #cbd5e1;
+}
+
+.section {
+  margin-top: 60px;
+}
+
+.card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 30px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 80px;
+  font-size: 14px;
+  color: #64748b;
+}
+</style>
 </head>
 <body>
 
 <div class="container">
+  <h1>Optimisez vos expéditions.<br>Sans complexité.</h1>
+  <p>Colixo accompagne les entreprises en Suisse pour améliorer la gestion de leurs colis.  
+  Plus simple. Plus fluide. Souvent moins cher.</p>
 
-  <h1>Réduisez vos coûts d’expédition e-commerce<br>Rapidement et facilement</h1>
-  <p>Colixo aide les e-commerçants en Suisse à optimiser leurs colis et réduire leurs coûts sans engagement.</p>
+  <a href="tel:+41798700488" class="btn btn-primary">📞 Appel rapide</a>
+  <a href="https://wa.me/41798700488" class="btn btn-secondary">💬 WhatsApp</a>
 
-  <div class="btn-group">
-    <a href="mailto:contact@colixo.ch"><button class="btn btn-primary">📧 Mail</button></a>
-    <a href="https://wa.me/41798700488"><button class="btn btn-secondary">💬 WhatsApp</button></a>
-    <a href="https://calendly.com/colixo/rdv"><button class="btn btn-primary">📅 RDV</button></a>
+  <div class="section">
+    <h2>Pourquoi Colixo ?</h2>
+    <div class="card">
+      <p>✔ Analyse rapide de votre système actuel</p>
+      <p>✔ Améliorations concrètes et immédiates</p>
+      <p>✔ Aucun changement complexe</p>
+      <p>✔ Aucun engagement</p>
+    </div>
   </div>
 
-  <!-- Formulaire Brevo -->
-  <div class="card">
-    <h2>Recevoir votre estimation</h2>
-    <form action="https://app.brevo.com/form/ID_DU_FORMULAIRE" method="POST">
-      <input type="text" name="COMPANY" placeholder="Nom de votre entreprise" required>
-      <input type="email" name="EMAIL" placeholder="Votre email" required>
-      <textarea name="NEEDS" placeholder="Votre besoin (optionnel)"></textarea>
-      <button type="submit" class="btn btn-primary">📩 Recevoir mon estimation</button>
-    </form>
-  </div>
-
-  <!-- Simulateur avancé + tarifs par colis -->
-  <div class="card simulateur">
-    <h2>Simulez vos coûts et voyez vos économies</h2>
-    <label>Nombre de colis / mois :</label>
-    <input type="number" id="nbColis" value="100">
-
-    <label>Poids moyen / colis (kg) :</label>
-    <input type="number" id="poids" value="2">
-
-    <label>Coût actuel / colis (CHF) :</label>
-    <input type="number" id="coutActuel" value="12">
-
-    <button type="button" class="btn btn-primary" onclick="calculEconomies()">Calculer économies</button>
-    <p id="resultat" style="margin-top:15px;font-weight:bold;"></p>
-
-    <div class="tarifs">
-      <h3>Tarifs par tranche de poids</h3>
-      <ul>
-        <li>0 – 2 kg : 9 CHF / colis</li>
-        <li>2 – 5 kg : 12 CHF / colis</li>
-        <li>5 – 10 kg : 18 CHF / colis</li>
-        <li>10 – 20 kg : 25 CHF / colis</li>
-      </ul>
+  <div class="section">
+    <h2>Contactez-nous</h2>
+    <div class="card">
+      <form id="contactForm">
+        <input type="text" name="company" placeholder="Nom de l’entreprise" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="needs" placeholder="Votre besoin (optionnel)"></textarea>
+        <button type="submit">Être contacté</button>
+      </form>
+      <p id="result"></p>
     </div>
   </div>
 
   <div class="footer">
-    Didier Gysling – Colixo<br>📞 079 870 04 88
+    Didier Gysling – Colixo<br>
+    📞 079 870 04 88
   </div>
-
 </div>
 
-<script src="js/main.js"></script>
+<script>
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const data = {
+    email: formData.get('email'),
+    attributes: {
+      COMPANY: formData.get('company'),
+      NEEDS: formData.get('needs') || ''
+    }
+  };
+
+  const res = await fetch('/send', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+
+  const result = await res.json();
+  document.getElementById('result').innerText = result.message;
+  form.reset();
+});
+</script>
+
 </body>
 </html>
