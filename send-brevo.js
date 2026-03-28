@@ -1,5 +1,4 @@
 import express from 'express';
-
 const app = express();
 app.use(express.json());
 app.use(express.static('public'));
@@ -18,6 +17,7 @@ app.post('/send', async (req, res) => {
       },
       body: JSON.stringify(data)
     });
+
     const json = await response.json();
     res.json({ message: 'Contact envoyé avec succès !', brevo: json });
   } catch (err) {
