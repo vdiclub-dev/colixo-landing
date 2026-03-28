@@ -5,37 +5,81 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colixo – Optimisation e-commerce</title>
 <style>
-body { margin:0; font-family:Arial,sans-serif; background:#0a0a0a; color:#fff; }
-.container { max-width:1000px; margin:auto; padding:50px 20px; text-align:center; }
-h1 { font-size:42px; color:#ff1e1e; }
-p { color:#ccc; font-size:18px; }
-input, button, select { padding:15px; margin:10px 0; border-radius:6px; border:none; }
-button { background:#ff1e1e; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s; }
-button:hover { transform:scale(1.05); }
-.card { background: rgba(30,30,30,0.7); padding:20px; border-radius:12px; margin:20px auto; max-width:400px; }
-.simulateur { text-align:left; max-width:400px; margin:auto; }
+/* Reset et fonts */
+body, html { margin:0; padding:0; font-family: 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color:#fff; }
+a { text-decoration: none; }
+
+/* Container principal */
+.container { max-width:1200px; margin:auto; padding:60px 20px; text-align:center; }
+
+/* Titres */
+h1 { font-size:48px; color:#ff1e1e; line-height:1.2; margin-bottom:20px; animation: fadeUp 1s ease forwards; opacity:0;}
+h2 { font-size:28px; margin-bottom:15px; color:#fff; }
+p { color:#ccc; font-size:18px; line-height:1.6; margin-bottom:30px; }
+
+/* Boutons premium */
+button, .btn {
+  padding:16px 35px;
+  border-radius:50px;
+  font-weight:bold;
+  font-size:18px;
+  border:none;
+  cursor:pointer;
+  margin:10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.btn-primary { background:#ff1e1e; color:#fff; box-shadow:0 6px 20px rgba(255,30,30,0.4);}
+.btn-primary:hover { transform:scale(1.05); box-shadow:0 8px 25px rgba(255,30,30,0.6);}
+.btn-secondary { background:transparent; border:2px solid #fff; color:#fff;}
+.btn-secondary:hover { transform:scale(1.05); }
+
+/* Cards */
+.card { background: rgba(30,30,30,0.7); backdrop-filter: blur(12px); padding:30px; border-radius:20px; margin:20px auto; max-width:450px; animation: fadeUp 1s ease forwards; opacity:0; }
+.card p { margin:15px 0; }
+
+/* Formulaire */
+input, textarea { width:100%; padding:15px; margin:10px 0; border-radius:10px; border:none; outline:none; font-size:16px; }
+textarea { resize:none; }
+
+/* Footer */
+.footer { margin-top:60px; font-size:14px; color:#64748b; }
+
+/* Simulateur économie */
+.simulateur input { width:calc(100% - 10px); }
+
+/* Animations */
+@keyframes fadeUp {
+  0% { opacity:0; transform: translateY(30px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+/* Responsive */
+@media(max-width:768px){
+  h1 { font-size:36px; }
+  h2 { font-size:24px; }
+  button, .btn { font-size:16px; padding:12px 25px; }
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Réduisez vos coûts d’expédition e-commerce</h1>
-  <p>Optimisation logistique pour les e-commerçants en Suisse. Simple, rapide, sans engagement.</p>
+  <h1>Réduisez vos coûts d’expédition e-commerce<br>Rapidement et facilement</h1>
+  <p>Colixo accompagne les e-commerçants en Suisse pour optimiser la logistique et réduire vos coûts, sans engagement.</p>
 
   <!-- Boutons contact -->
-  <a href="mailto:contact@colixo.ch"><button>📧 Envoyer un mail</button></a>
-  <a href="https://wa.me/41798700488"><button>💬 WhatsApp</button></a>
-  <a href="https://calendly.com/colixo/rdv"><button>📅 Prendre RDV</button></a>
+  <a href="mailto:contact@colixo.ch"><button class="btn btn-primary">📧 Envoyer un mail</button></a>
+  <a href="https://wa.me/41798700488"><button class="btn btn-secondary">💬 WhatsApp</button></a>
+  <a href="https://calendly.com/colixo/rdv"><button class="btn btn-primary">📅 Prendre RDV</button></a>
 
-  <!-- Formulaire Brevo -->
+  <!-- Formulaire Brevo intégré -->
   <div class="card">
-    <h2>Recevoir une estimation</h2>
-    <!-- Utiliser formulaire Brevo intégré -->
+    <h2>Recevoir votre estimation</h2>
     <form action="https://app.brevo.com/form/ID_DU_FORMULAIRE" method="POST">
       <input type="text" name="COMPANY" placeholder="Nom de votre entreprise" required>
       <input type="email" name="EMAIL" placeholder="Votre email" required>
       <textarea name="NEEDS" placeholder="Votre besoin (optionnel)"></textarea>
-      <button type="submit">📩 Recevoir mon estimation</button>
+      <button type="submit" class="btn btn-primary">📩 Recevoir mon estimation</button>
     </form>
   </div>
 
@@ -48,8 +92,13 @@ button:hover { transform:scale(1.05); }
     <input type="number" id="poids" value="2">
     <p>Coût actuel / colis (CHF) :</p>
     <input type="number" id="coutActuel" value="12">
-    <button type="button" onclick="calculEconomies()">Calculer économies</button>
-    <p id="resultat"></p>
+    <button type="button" class="btn btn-primary" onclick="calculEconomies()">Calculer économies</button>
+    <p id="resultat" style="margin-top:15px;font-weight:bold;"></p>
+  </div>
+
+  <div class="footer">
+    Didier Gysling – Colixo<br>
+    📞 079 870 04 88
   </div>
 </div>
 
@@ -58,8 +107,7 @@ function calculEconomies(){
   let nb = parseFloat(document.getElementById('nbColis').value);
   let poids = parseFloat(document.getElementById('poids').value);
   let cout = parseFloat(document.getElementById('coutActuel').value);
-  // Exemple : on réduit de 20% avec Colixo
-  let economie = nb * cout * 0.2;
+  let economie = nb * cout * 0.2; // Réduction estimée 20%
   document.getElementById('resultat').innerText = `💰 Économie potentielle : ${economie.toFixed(2)} CHF / mois`;
 }
 </script>
